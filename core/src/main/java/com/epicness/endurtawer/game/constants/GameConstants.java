@@ -17,8 +17,10 @@ public class GameConstants {
     public static final Vector2 STARTING_PLAYER_POSITION = new Vector2(PLAYER_WIDTH / 2f, CAMERA_HEIGHT / 2f);
 
     public static final float STOP_TIME = 1.5f;
-    public static final int TENTACLE_SEGMENTS =20;
-    public static final float TENTACLE_SEGMENT_LENGTH = 15f;
+    public static final int GOOD_TENTACLE_SEGMENTS = 20;
+    public static final int EVIL_TENTACLE_SEGMENTS = 10;
+    public static final float GOOD_SEGMENT_LENGTH = 15f;
+    public static final float EVIL_SEGMENT_LENGTH = 35f;
     public static final float TENTACLE_START_WIDTH = 5f;
     public static final float TENTACLE_END_WIDTH = 20f;
     public static final float TENTACLE_LIGHT_DIAMETER = 20f;

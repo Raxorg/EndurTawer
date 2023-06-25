@@ -8,7 +8,7 @@ import com.epicness.endurtawer.game.logic.GameLogicHandler;
 import com.epicness.endurtawer.game.stuff.LightTentacle;
 import com.epicness.endurtawer.game.stuff.Player;
 
-public class TentacleMover extends GameLogicHandler {
+public class TentacleTranslator extends GameLogicHandler {
 
     private DelayedRemovalArray<LightTentacle> goodTentacles, evilTentacles;
     private Player player;

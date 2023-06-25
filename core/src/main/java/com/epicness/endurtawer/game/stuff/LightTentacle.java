@@ -3,12 +3,11 @@ package com.epicness.endurtawer.game.stuff;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 import static com.epicness.endurtawer.game.constants.GameConstants.TENTACLE_END_WIDTH;
 import static com.epicness.endurtawer.game.constants.GameConstants.TENTACLE_LIGHT_DIAMETER;
-import static com.epicness.endurtawer.game.constants.GameConstants.TENTACLE_SEGMENTS;
-import static com.epicness.endurtawer.game.constants.GameConstants.TENTACLE_SEGMENT_LENGTH;
 import static com.epicness.endurtawer.game.constants.GameConstants.TENTACLE_START_WIDTH;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.epicness.endurtawer.game.assets.GameAssets;
 import com.epicness.fundamentals.assets.SharedAssets;
 import com.epicness.fundamentals.stuff.DualSprited;
@@ -20,8 +19,9 @@ public class LightTentacle extends Tentacle {
 
     private final DualSprited bush, light;
 
-    public LightTentacle(Color startColor, Color endColor, SharedAssets sharedAssets, GameAssets assets) {
-        super(TENTACLE_SEGMENTS, TENTACLE_SEGMENT_LENGTH, TENTACLE_START_WIDTH, TENTACLE_END_WIDTH, startColor, endColor);
+    public LightTentacle(int segments, float segmentLength, Color startColor, Color endColor,
+                         SharedAssets sharedAssets, GameAssets assets) {
+        super(segments, segmentLength, TENTACLE_START_WIDTH, TENTACLE_END_WIDTH, startColor, endColor);
 
         bush = new DualSprited(assets.getBushGlow(), assets.getBush());
         bush.setSize(150f);
@@ -41,6 +41,10 @@ public class LightTentacle extends Tentacle {
         super.draw(shapeDrawer);
         bush.draw(spriteBatch);
         light.draw(spriteBatch);
+    }
+
+    public void drawDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.circle(light.getForegroundCenterX(), light.getForegroundCenterY(), 5f);
     }
 
     @Override

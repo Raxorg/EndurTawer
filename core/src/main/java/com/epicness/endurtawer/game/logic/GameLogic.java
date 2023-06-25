@@ -5,7 +5,7 @@ import com.epicness.endurtawer.game.logic.player.PlayerHealthHandler;
 import com.epicness.endurtawer.game.logic.player.PlayerMover;
 import com.epicness.endurtawer.game.logic.player.PlayerTentacleInteractionHandler;
 import com.epicness.endurtawer.game.logic.tentacles.TentacleLightHandler;
-import com.epicness.endurtawer.game.logic.tentacles.TentacleMover;
+import com.epicness.endurtawer.game.logic.tentacles.TentacleTranslator;
 import com.epicness.endurtawer.game.logic.tentacles.TentacleSpawner;
 import com.epicness.fundamentals.logic.Logic;
 
@@ -18,8 +18,11 @@ public class GameLogic extends Logic {
     private final PlayerTentacleInteractionHandler playerTentacleInteractionHandler;
     // Tentacles
     private final TentacleLightHandler tentacleLightHandler;
-    private final TentacleMover tentacleMover;
     private final TentacleSpawner tentacleSpawner;
+    private final TentacleTranslator tentacleTranslator;
+    // Other
+    private final BackgroundHandler backgroundHandler;
+    private final BubbleHandler bubbleHandler;
 
     public GameLogic() {
         registerHandler(new GameInputHandler());
@@ -30,8 +33,12 @@ public class GameLogic extends Logic {
         registerHandler(playerTentacleInteractionHandler = new PlayerTentacleInteractionHandler());
         // Tentacles
         registerHandler(tentacleLightHandler = new TentacleLightHandler());
-        registerHandler(tentacleMover = new TentacleMover());
         registerHandler(tentacleSpawner = new TentacleSpawner());
+        registerHandler(tentacleTranslator = new TentacleTranslator());
+        // Other
+        registerHandler(backgroundHandler = new BackgroundHandler());
+        registerHandler(bubbleHandler = new BubbleHandler());
+        registerHandler(new Debugger());
     }
 
     @Override
@@ -43,7 +50,10 @@ public class GameLogic extends Logic {
         playerTentacleInteractionHandler.update(delta);
         // Tentacles
         tentacleLightHandler.update();
-        tentacleMover.update(delta);
         tentacleSpawner.update(delta);
+        tentacleTranslator.update(delta);
+        // Other
+        backgroundHandler.update();
+        bubbleHandler.update(delta);
     }
 }

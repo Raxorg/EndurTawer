@@ -2,6 +2,8 @@ package com.epicness.endurtawer.game.logic;
 
 import static com.badlogic.gdx.Input.Keys.A;
 import static com.badlogic.gdx.Input.Keys.D;
+import static com.badlogic.gdx.Input.Keys.F;
+import static com.badlogic.gdx.Input.Keys.G;
 import static com.badlogic.gdx.Input.Keys.S;
 import static com.badlogic.gdx.Input.Keys.W;
 import static com.epicness.endurtawer.game.constants.GameConstants.ACCELERATION;
@@ -26,6 +28,12 @@ public class GameInputHandler extends InputHandler<GameLogic, GameStuff> {
                 break;
             case D:
                 logic.get(PlayerMover.class).accelerate(ACCELERATION, 0f);
+                break;
+            case F:
+                logic.get(Debugger.class).toggleDebug();
+                break;
+            case G:
+                logic.get(Debugger.class).toggleOnlyDebug();
                 break;
         }
     }

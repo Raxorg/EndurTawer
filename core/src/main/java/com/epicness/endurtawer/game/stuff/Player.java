@@ -8,6 +8,7 @@ import static com.epicness.endurtawer.game.constants.GameConstants.PLAYER_WIDTH;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.epicness.fundamentals.stuff.DualSprited;
 import com.epicness.fundamentals.stuff.Sprited;
@@ -39,6 +40,10 @@ public class Player {
         glow.draw(spriteBatch);
         fish.draw(spriteBatch);
         healthBar.draw(spriteBatch);
+    }
+
+    public void drawDebug(ShapeRenderer shapeRenderer) {
+        shapeRenderer.circle(getCenter().x, getCenter().y, 5f);
     }
 
     public float getX() {

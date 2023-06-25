@@ -4,6 +4,10 @@ import static com.badlogic.gdx.graphics.Color.BLACK;
 import static com.badlogic.gdx.graphics.Color.CHARTREUSE;
 import static com.badlogic.gdx.graphics.Color.RED;
 import static com.badlogic.gdx.graphics.Color.WHITE;
+import static com.epicness.endurtawer.game.constants.GameConstants.EVIL_SEGMENT_LENGTH;
+import static com.epicness.endurtawer.game.constants.GameConstants.EVIL_TENTACLE_SEGMENTS;
+import static com.epicness.endurtawer.game.constants.GameConstants.GOOD_SEGMENT_LENGTH;
+import static com.epicness.endurtawer.game.constants.GameConstants.GOOD_TENTACLE_SEGMENTS;
 import static com.epicness.fundamentals.SharedConstants.CAMERA_HEIGHT;
 import static com.epicness.fundamentals.SharedConstants.CAMERA_WIDTH;
 
@@ -40,17 +44,17 @@ public class TentacleSpawner extends GameLogicHandler {
     public void spawnGoodTentacle() {
         float random = MathUtils.random(0.5f);
         Color color = CHARTREUSE.cpy().lerp(WHITE, random);
-        goodTentacles.add(spawnTentacle(WHITE, color));
+        goodTentacles.add(spawnTentacle(GOOD_TENTACLE_SEGMENTS, GOOD_SEGMENT_LENGTH, WHITE, color));
     }
 
     public void spawnEvilTentacle() {
         float random = MathUtils.random(0.5f);
         Color color = RED.cpy().lerp(BLACK, random);
-        evilTentacles.add(spawnTentacle(BLACK, color));
+        evilTentacles.add(spawnTentacle(EVIL_TENTACLE_SEGMENTS, EVIL_SEGMENT_LENGTH, BLACK, color));
     }
 
-    private LightTentacle spawnTentacle(Color startColor, Color endColor) {
-        LightTentacle tentacle = new LightTentacle(startColor, endColor, sharedAssets, assets);
+    private LightTentacle spawnTentacle(int segments, float segmentLength, Color startColor, Color endColor) {
+        LightTentacle tentacle = new LightTentacle(segments, segmentLength, startColor, endColor, sharedAssets, assets);
         tentacle.setPosition(CAMERA_WIDTH * 1.5f, MathUtils.random(CAMERA_HEIGHT));
         tentacle.lock();
         return tentacle;
