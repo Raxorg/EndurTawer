@@ -22,11 +22,11 @@ public class Tentacle implements Movable {
         target = new Vector2();
     }
 
-    public Tentacle(int lineAmount, float lineLength, float startingWidth, float finalWidth, Color color1, Color color2) {
+    public Tentacle(int lineAmount, float lineLength, float startingWidth, float finalWidth, Color startColor, Color endColor) {
         this(lineAmount, lineLength);
         for (int i = 0; i < lineAmount; i++) {
             lines[i].width = MathUtils.map(0, lineAmount - 1, startingWidth, finalWidth, i);
-            lines[i].setColor(color1.cpy().lerp(color2, i / (lineAmount - 1f)));
+            lines[i].setColor(endColor.cpy().lerp(startColor, i / (lineAmount - 1f)));
         }
     }
 

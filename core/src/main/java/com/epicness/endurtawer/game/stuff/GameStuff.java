@@ -1,33 +1,30 @@
 package com.epicness.endurtawer.game.stuff;
 
-import static com.epicness.endurtawer.game.constants.GameConstants.PLAYER_HEIGHT;
-import static com.epicness.endurtawer.game.constants.GameConstants.PLAYER_WIDTH;
-
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.epicness.endurtawer.game.assets.GameAssets;
-import com.epicness.fundamentals.stuff.DualSprited;
 import com.epicness.fundamentals.stuff.Stuff;
-import com.epicness.fundamentals.stuff.shapes.Tentacle;
 
 public class GameStuff extends Stuff<GameAssets> {
 
-    private DelayedRemovalArray<LightTentacle> tentacles;
-    private DualSprited player;
+    private DelayedRemovalArray<LightTentacle> goodTentacles, evilTentacles;
+    private Player player;
 
     @Override
     public void initializeStuff() {
-        tentacles = new DelayedRemovalArray<>();
-
-        player = new DualSprited(assets.getFishGlow(), assets.getFish());
-        player.setSize(PLAYER_WIDTH, PLAYER_HEIGHT);
-        player.setFlip(true, false);
+        goodTentacles = new DelayedRemovalArray<>();
+        evilTentacles = new DelayedRemovalArray<>();
+        player = new Player(assets.getBushGlow(), assets.getFishGlow(), assets.getFish(), sharedAssets.getPixel());
     }
 
-    public DelayedRemovalArray<LightTentacle> getTentacles() {
-        return tentacles;
+    public DelayedRemovalArray<LightTentacle> getGoodTentacles() {
+        return goodTentacles;
     }
 
-    public DualSprited getPlayer() {
+    public DelayedRemovalArray<LightTentacle> getEvilTentacles() {
+        return evilTentacles;
+    }
+
+    public Player getPlayer() {
         return player;
     }
 }

@@ -1,6 +1,8 @@
 package com.epicness.endurtawer.game.stuff;
 
+import static com.badlogic.gdx.graphics.Color.WHITE;
 import static com.epicness.endurtawer.game.constants.GameConstants.TENTACLE_END_WIDTH;
+import static com.epicness.endurtawer.game.constants.GameConstants.TENTACLE_LIGHT_DIAMETER;
 import static com.epicness.endurtawer.game.constants.GameConstants.TENTACLE_SEGMENTS;
 import static com.epicness.endurtawer.game.constants.GameConstants.TENTACLE_SEGMENT_LENGTH;
 import static com.epicness.endurtawer.game.constants.GameConstants.TENTACLE_START_WIDTH;
@@ -20,8 +22,17 @@ public class LightTentacle extends Tentacle {
 
     public LightTentacle(Color startColor, Color endColor, SharedAssets sharedAssets, GameAssets assets) {
         super(TENTACLE_SEGMENTS, TENTACLE_SEGMENT_LENGTH, TENTACLE_START_WIDTH, TENTACLE_END_WIDTH, startColor, endColor);
+
         bush = new DualSprited(assets.getBushGlow(), assets.getBush());
-        light = new DualSprited(sharedAssets.getGlow(), sharedAssets.getCircle());
+        bush.setSize(150f);
+        bush.setOriginCenter();
+        bush.setColor(startColor);
+
+        light = new DualSprited(assets.getBushGlow(), sharedAssets.getCircle());
+        light.setBackgroundSize(80f);
+        light.setForegroundSize(TENTACLE_LIGHT_DIAMETER);
+        light.setOriginCenter();
+        light.setColor(endColor.cpy().lerp(WHITE, 0.5f));
     }
 
     @Override
@@ -35,11 +46,14 @@ public class LightTentacle extends Tentacle {
     @Override
     public void setPosition(float x, float y) {
         super.setPosition(x, y);
-        bush.setPosition(x, y);
+        bush.setOriginBasedPosition(x, y);
+        light.setPosition(x, y);
     }
 
-    public DualSprited getBush() {
-        return bush;
+    @Override
+    public void translateX(float amount) {
+        super.translateX(amount);
+        bush.translateX(amount);
     }
 
     public DualSprited getLight() {

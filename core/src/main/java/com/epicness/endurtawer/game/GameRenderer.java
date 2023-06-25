@@ -1,5 +1,6 @@
 package com.epicness.endurtawer.game;
 
+import static com.badlogic.gdx.graphics.Color.BLACK;
 import static com.badlogic.gdx.graphics.Color.NAVY;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -21,10 +22,13 @@ public class GameRenderer extends Renderer<GameStuff> {
 
     @Override
     public void render() {
-        ScreenUtils.clear(NAVY);
+        ScreenUtils.clear(NAVY.cpy().lerp(BLACK, 0.75f));
         spriteBatch.begin();
-        for (int i = 0; i < stuff.getTentacles().size; i++) {
-            stuff.getTentacles().get(i).draw(shapeDrawer);
+        for (int i = 0; i < stuff.getGoodTentacles().size; i++) {
+            stuff.getGoodTentacles().get(i).draw(shapeDrawer);
+        }
+        for (int i = 0; i < stuff.getEvilTentacles().size; i++) {
+            stuff.getEvilTentacles().get(i).draw(shapeDrawer);
         }
         stuff.getPlayer().draw(spriteBatch);
         spriteBatch.end();

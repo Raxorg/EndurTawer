@@ -1,16 +1,18 @@
-package com.epicness.endurtawer.game.logic;
+package com.epicness.endurtawer.game.logic.player;
 
 import static com.epicness.endurtawer.game.constants.GameConstants.MAX_PLAYER_X;
 import static com.epicness.endurtawer.game.constants.GameConstants.MAX_PLAYER_Y;
+import static com.epicness.endurtawer.game.constants.GameConstants.STARTING_PLAYER_POSITION;
 import static com.epicness.endurtawer.game.constants.GameConstants.STOP_TIME;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.epicness.fundamentals.stuff.DualSprited;
+import com.epicness.endurtawer.game.logic.GameLogicHandler;
+import com.epicness.endurtawer.game.stuff.Player;
 
-public class PlayerMovementHandler extends GameLogicHandler {
+public class PlayerMover extends GameLogicHandler {
 
-    private DualSprited player;
+    private Player player;
     private Vector2 speed;
     private Vector2 acceleration;
     private float lastSpeedX, stopTimeX, lastSpeedY, stopTimeY;
@@ -18,6 +20,7 @@ public class PlayerMovementHandler extends GameLogicHandler {
     @Override
     protected void init() {
         player = stuff.getPlayer();
+        player.setOriginBasedPosition(STARTING_PLAYER_POSITION);
         speed = new Vector2();
         acceleration = new Vector2();
     }
@@ -37,7 +40,6 @@ public class PlayerMovementHandler extends GameLogicHandler {
 
     private void movePlayer(float delta) {
         speed.mulAdd(acceleration.cpy(), delta);
-        player.translate(speed);
         float x = MathUtils.clamp(player.getX(), 0f, MAX_PLAYER_X);
         if (x == 0) {
             speed.x = Math.max(speed.x, 0f);
@@ -52,7 +54,7 @@ public class PlayerMovementHandler extends GameLogicHandler {
         if (y == MAX_PLAYER_Y) {
             speed.y = Math.min(speed.y, 0f);
         }
-        player.setPosition(x, y);
+        player.translate(speed);
     }
 
     public void accelerate(float xAcceleration, float yAcceleration) {
