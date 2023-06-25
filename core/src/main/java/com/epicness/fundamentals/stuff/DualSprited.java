@@ -87,6 +87,10 @@ public class DualSprited implements Buttonable, Scrollable {
         foreground.setOriginBasedPosition(x, y);
     }
 
+    public void setOriginBasedPosition(Vector2 position) {
+        setOriginBasedPosition(position.x, position.y);
+    }
+
     public float getForegroundCenterX() {
         return foreground.getX() + foreground.getWidth() / 2f;
     }
