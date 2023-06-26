@@ -4,6 +4,7 @@ import static com.badlogic.gdx.Input.Keys.A;
 import static com.badlogic.gdx.Input.Keys.D;
 import static com.badlogic.gdx.Input.Keys.F;
 import static com.badlogic.gdx.Input.Keys.G;
+import static com.badlogic.gdx.Input.Keys.M;
 import static com.badlogic.gdx.Input.Keys.R;
 import static com.badlogic.gdx.Input.Keys.S;
 import static com.badlogic.gdx.Input.Keys.W;
@@ -36,6 +37,9 @@ public class GameInputHandler extends InputHandler<GameLogic, GameStuff> {
                 break;
             case G:
                 logic.get(Debugger.class).toggleOnlyDebug();
+                break;
+            case M:
+                logic.get(MusicHandler.class).toggleMute();
                 break;
         }
     }

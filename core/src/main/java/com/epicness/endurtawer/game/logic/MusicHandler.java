@@ -4,7 +4,7 @@ import com.badlogic.gdx.audio.Music;
 
 public class MusicHandler extends GameLogicHandler {
 
-    private boolean music1;
+    private boolean music1, muted;
 
     @Override
     protected void init() {
@@ -12,6 +12,7 @@ public class MusicHandler extends GameLogicHandler {
     }
 
     private void checkMusic() {
+        if (muted) return;
         if (assets.getMusic1().isPlaying() || assets.getMusic2().isPlaying()) return;
         assets.getMusic1().setVolume(0.5f);
         assets.getMusic1().play();
@@ -20,7 +21,7 @@ public class MusicHandler extends GameLogicHandler {
 
     @Override
     protected void update() {
-        if (assets.getMusic1().isPlaying() || assets.getMusic2().isPlaying()) {
+        if (assets.getMusic1().isPlaying() || assets.getMusic2().isPlaying() || muted) {
             return;
         }
         music1 = !music1;
@@ -35,5 +36,15 @@ public class MusicHandler extends GameLogicHandler {
 
     public void keyDown() {
         checkMusic();
+    }
+
+    public void toggleMute() {
+        muted = !muted;
+        if (muted) {
+            assets.getMusic1().stop();
+            assets.getMusic2().stop();
+        } else {
+            checkMusic();
+        }
     }
 }
