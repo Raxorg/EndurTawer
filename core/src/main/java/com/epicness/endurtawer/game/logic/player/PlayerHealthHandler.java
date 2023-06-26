@@ -7,6 +7,7 @@ import static com.epicness.fundamentals.SharedConstants.CAMERA_WIDTH;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.MathUtils;
 import com.epicness.endurtawer.game.logic.GameLogicHandler;
+import com.epicness.endurtawer.game.logic.ScoreHandler;
 import com.epicness.endurtawer.game.stuff.Player;
 import com.epicness.fundamentals.stuff.Sprited;
 
@@ -20,7 +21,7 @@ public class PlayerHealthHandler extends GameLogicHandler {
         player = stuff.getPlayer();
         player.health = 1f;
 
-        healthBar = player.getHealthBar();
+        healthBar = stuff.getHealthBar();
         healthBar.setWidth(CAMERA_WIDTH);
         healthBar.setColor(CHARTREUSE);
     }
@@ -33,8 +34,8 @@ public class PlayerHealthHandler extends GameLogicHandler {
         Color color = RED.cpy().lerp(CHARTREUSE, player.health);
         healthBar.setColor(color);
 
-        if (player.health == 0f) {
-            // TODO: game over
+        if (player.health <= 0f) {
+            logic.get(ScoreHandler.class).gameOver();
         }
     }
 }

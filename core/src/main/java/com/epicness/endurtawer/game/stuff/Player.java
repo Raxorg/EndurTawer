@@ -17,10 +17,9 @@ public class Player {
 
     private final Sprited glow;
     private final DualSprited fish;
-    private final Sprited healthBar;
     public float health;
 
-    public Player(Sprite glowSprite, Sprite fishGlowSprite, Sprite fishSprite, Sprite pixel) {
+    public Player(Sprite glowSprite, Sprite fishGlowSprite, Sprite fishSprite) {
         fish = new DualSprited(fishGlowSprite, fishSprite);
         fish.setSize(PLAYER_WIDTH, PLAYER_HEIGHT);
         fish.setOriginCenter();
@@ -30,16 +29,12 @@ public class Player {
         glow.setOriginCenter();
         glow.setOriginBasedPosition(PLAYER_WIDTH / 2f, PLAYER_HEIGHT / 2f);
 
-        healthBar = new Sprited(pixel);
-        healthBar.setHeight(5f);
-
         health = 1f;
     }
 
     public void draw(SpriteBatch spriteBatch) {
         glow.draw(spriteBatch);
         fish.draw(spriteBatch);
-        healthBar.draw(spriteBatch);
     }
 
     public void drawDebug(ShapeRenderer shapeRenderer) {
@@ -76,9 +71,5 @@ public class Player {
     public void setColor(Color color) {
         glow.setColor(color.cpy().lerp(WHITE, 0.25f).lerp(CLEAR, 0.5f));
         fish.setColor(color);
-    }
-
-    public Sprited getHealthBar() {
-        return healthBar;
     }
 }

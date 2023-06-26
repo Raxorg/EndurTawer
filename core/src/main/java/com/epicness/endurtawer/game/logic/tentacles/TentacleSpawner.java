@@ -25,7 +25,9 @@ public class TentacleSpawner extends GameLogicHandler {
     @Override
     protected void init() {
         goodTentacles = stuff.getGoodTentacles();
+        goodTentacles.clear();
         evilTentacles = stuff.getEvilTentacles();
+        evilTentacles.clear();
     }
 
     public void update(float delta) {
@@ -55,7 +57,7 @@ public class TentacleSpawner extends GameLogicHandler {
 
     private LightTentacle spawnTentacle(int segments, float segmentLength, Color startColor, Color endColor) {
         LightTentacle tentacle = new LightTentacle(segments, segmentLength, startColor, endColor, sharedAssets, assets);
-        tentacle.setPosition(CAMERA_WIDTH * 1.5f, MathUtils.random(CAMERA_HEIGHT));
+        tentacle.setPosition(CAMERA_WIDTH * 1.25f, MathUtils.random(CAMERA_HEIGHT));
         tentacle.lock();
         return tentacle;
     }

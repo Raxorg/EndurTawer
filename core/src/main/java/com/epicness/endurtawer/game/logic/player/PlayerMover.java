@@ -16,6 +16,7 @@ public class PlayerMover extends GameLogicHandler {
     private Vector2 speed;
     private Vector2 acceleration;
     private float lastSpeedX, stopTimeX, lastSpeedY, stopTimeY;
+    private boolean blocked;
 
     @Override
     protected void init() {
@@ -23,6 +24,7 @@ public class PlayerMover extends GameLogicHandler {
         player.setOriginBasedPosition(STARTING_PLAYER_POSITION);
         speed = new Vector2();
         acceleration = new Vector2();
+        blocked = false;
     }
 
     public void update(float delta) {
@@ -39,6 +41,8 @@ public class PlayerMover extends GameLogicHandler {
     }
 
     private void movePlayer(float delta) {
+        if (blocked) return;
+
         speed.mulAdd(acceleration.cpy(), delta);
         float x = MathUtils.clamp(player.getX(), 0f, MAX_PLAYER_X);
         if (x == 0) {
@@ -68,5 +72,9 @@ public class PlayerMover extends GameLogicHandler {
             lastSpeedY = speed.y;
             stopTimeY = 0f;
         }
+    }
+
+    public void blockMovement() {
+        blocked = true;
     }
 }

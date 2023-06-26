@@ -21,8 +21,8 @@ public class PlayerTentacleInteractionHandler extends GameLogicHandler {
     }
 
     public void update(float delta) {
-        if (colliding(goodTentacles)) player.health += delta / 3f;
-        if (colliding(evilTentacles)) player.health -= delta / 2f;
+        if (colliding(goodTentacles)) player.health += delta * 0.15f;
+        if (colliding(evilTentacles)) player.health -= delta * 0.33f;
     }
 
     private boolean colliding(DelayedRemovalArray<LightTentacle> tentacles) {

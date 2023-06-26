@@ -32,7 +32,7 @@ public class LightTentacle extends Tentacle {
         light.setBackgroundSize(80f);
         light.setForegroundSize(TENTACLE_LIGHT_DIAMETER);
         light.setOriginCenter();
-        light.setColor(endColor.cpy().lerp(WHITE, 0.5f));
+        light.setColor(endColor.cpy().lerp(WHITE, 0.35f));
     }
 
     @Override

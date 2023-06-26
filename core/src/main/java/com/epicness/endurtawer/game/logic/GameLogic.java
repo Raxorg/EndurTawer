@@ -23,6 +23,8 @@ public class GameLogic extends Logic {
     // Other
     private final BackgroundHandler backgroundHandler;
     private final BubbleHandler bubbleHandler;
+    private final MusicHandler musicHandler;
+    private final ScoreHandler scoreHandler;
 
     public GameLogic() {
         registerHandler(new GameInputHandler());
@@ -39,6 +41,8 @@ public class GameLogic extends Logic {
         registerHandler(backgroundHandler = new BackgroundHandler());
         registerHandler(bubbleHandler = new BubbleHandler());
         registerHandler(new Debugger());
+        registerHandler(musicHandler = new MusicHandler());
+        registerHandler(scoreHandler = new ScoreHandler());
     }
 
     @Override
@@ -53,7 +57,9 @@ public class GameLogic extends Logic {
         tentacleSpawner.update(delta);
         tentacleTranslator.update(delta);
         // Other
-        backgroundHandler.update();
+        backgroundHandler.update(delta);
         bubbleHandler.update(delta);
+        musicHandler.update();
+        scoreHandler.update(delta);
     }
 }
