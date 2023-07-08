@@ -25,9 +25,11 @@ public abstract class LogicHandler<A extends Assets, L extends Logic, R extends 
     protected void init() {
     }
 
-    protected void update() {}
+    protected void update() {
+    }
 
-    protected void update(float delta) {}
+    protected void update(float delta) {
+    }
 
     protected final void setSharedStructure(
             Game game,

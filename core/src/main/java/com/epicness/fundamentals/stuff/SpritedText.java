@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.epicness.fundamentals.stuff.interfaces.Buttonable;
-import com.epicness.fundamentals.stuff.interfaces.Scrollable;
+import com.epicness.fundamentals.stuff.interfaces.Movable;
 
-public class SpritedText implements Buttonable, Scrollable {
+public class SpritedText implements Buttonable, Movable {
 
     private final Sprite background;
     private final Text label;
@@ -30,13 +30,15 @@ public class SpritedText implements Buttonable, Scrollable {
         return background.getBoundingRectangle().contains(x, y);
     }
 
+    @Override
     public float getX() {
         return background.getX();
     }
 
-    public void setX(float x) {
-        background.setX(x);
-        label.setX(x);
+    @Override
+    public void translateX(float x) {
+        background.translateX(x);
+        label.translateX(x);
     }
 
     @Override
@@ -45,25 +47,20 @@ public class SpritedText implements Buttonable, Scrollable {
     }
 
     @Override
-    public void setY(float y) {
-        background.setY(y);
-        label.setY(y + background.getHeight() / 2f);
-    }
-
-    @Override
     public void translateY(float y) {
         background.translateY(y);
         label.translateY(y);
     }
 
+    @Override
+    public void setY(float y) {
+        background.setY(y);
+        label.setY(y + background.getHeight() / 2f);
+    }
+
     public void setPosition(float x, float y) {
         background.setPosition(x, y);
         label.setPosition(x, y + background.getHeight() / 2f);
-    }
-
-    public void translateX(float x) {
-        background.translateX(x);
-        label.translateX(x);
     }
 
     public float getWidth() {
@@ -80,7 +77,6 @@ public class SpritedText implements Buttonable, Scrollable {
 
     public void setSize(float width, float height) {
         background.setSize(width, height);
-        label.setTextTargetWidth(width);
         label.setY(background.getY() + height / 2f);
     }
 
@@ -102,5 +98,9 @@ public class SpritedText implements Buttonable, Scrollable {
 
     public void setText(String text) {
         label.setText(text);
+    }
+
+    public void setTextTargetWidth(float width) {
+        label.setTextTargetWidth(width);
     }
 }

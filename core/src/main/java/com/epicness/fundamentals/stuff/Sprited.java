@@ -5,13 +5,13 @@ import static com.badlogic.gdx.graphics.Texture.TextureFilter.Linear;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.epicness.fundamentals.renderer.ShapeBatch;
+import com.epicness.fundamentals.stuff.interfaces.Actor;
 import com.epicness.fundamentals.stuff.interfaces.Buttonable;
-import com.epicness.fundamentals.stuff.interfaces.Parallaxable;
 
-public class Sprited implements Buttonable, Parallaxable {
+public class Sprited implements Actor, Buttonable {
 
     private final Sprite sprite;
 
@@ -19,22 +19,32 @@ public class Sprited implements Buttonable, Parallaxable {
         this.sprite = new Sprite(sprite);
     }
 
-    public void draw(SpriteBatch spriteBatch) {
+    public void setSprite(Sprite sprite) {
+        this.sprite.setRegion(sprite);
+    }
+
+    @Override
+    public void draw(SpriteBatch spriteBatch, ShapeBatch shapeBatch) {
         sprite.draw(spriteBatch);
     }
 
-    public void drawDebug(ShapeRenderer shapeRenderer) {
-        Rectangle bounds = sprite.getBoundingRectangle();
-        shapeRenderer.rect(bounds.x, bounds.y, bounds.width, bounds.height);
-    }
-
-    public void setSprite(Sprite sprite) {
-        this.sprite.set(sprite);
+    @Override
+    public void drawDebug(ShapeBatch shapeBatch) {
+        shapeBatch.rect(getBoundingRectangle());
     }
 
     @Override
     public boolean contains(float x, float y) {
-        return sprite.getBoundingRectangle().contains(x, y);
+        return getBoundingRectangle().contains(x, y);
+    }
+
+    public Rectangle getBoundingRectangle() {
+        return sprite.getBoundingRectangle();
+    }
+
+    @Override
+    public float getX() {
+        return sprite.getX();
     }
 
     @Override
@@ -42,36 +52,39 @@ public class Sprited implements Buttonable, Parallaxable {
         sprite.translateX(amount);
     }
 
-    public Rectangle getBoundingRectangle() {
-        return sprite.getBoundingRectangle();
-    }
-
-    public float getX() {
-        return sprite.getX();
-    }
-
-    public void setX(float x) {
-        sprite.setX(x);
-    }
-
+    @Override
     public float getY() {
         return sprite.getY();
     }
 
-    public void setY(float y) {
-        sprite.setY(y);
+    @Override
+    public void translateY(float amount) {
+        sprite.translateY(amount);
     }
 
-    public Vector2 getPosition() {
-        return new Vector2(sprite.getX(), sprite.getY());
+    @Override
+    public void stretchWidth(float amount) {
+        sprite.setSize(sprite.getWidth() + amount, sprite.getHeight());
     }
 
-    public void setPosition(float x, float y) {
-        sprite.setPosition(x, y);
+    @Override
+    public void stretchHeight(float amount) {
+        sprite.setSize(sprite.getWidth(), sprite.getHeight() + amount);
     }
 
-    public void setPosition(Vector2 position) {
-        setPosition(position.x, position.y);
+    @Override
+    public float getWidth() {
+        return sprite.getWidth();
+    }
+
+    @Override
+    public float getHeight() {
+        return sprite.getHeight();
+    }
+
+    @Override
+    public void rotate(float degrees) {
+        sprite.rotate(degrees);
     }
 
     public void setOriginBasedPosition(float x, float y) {
@@ -79,7 +92,7 @@ public class Sprited implements Buttonable, Parallaxable {
     }
 
     public void setOriginBasedPosition(Vector2 position) {
-        sprite.setOriginBasedPosition(position.x, position.y);
+        setOriginBasedPosition(position.x, position.y);
     }
 
     public float getCenterX() {
@@ -104,43 +117,6 @@ public class Sprited implements Buttonable, Parallaxable {
 
     public Vector2 getOriginBasedCenter() {
         return new Vector2(getOriginBasedX(), getOriginBasedY());
-    }
-
-    public void translateY(float amount) {
-        sprite.translateY(amount);
-    }
-
-    public void translate(float xAmount, float yAmount) {
-        translateX(xAmount);
-        translateY(yAmount);
-    }
-
-    public void translate(Vector2 amount) {
-        translate(amount.x, amount.y);
-    }
-
-    public float getWidth() {
-        return sprite.getWidth();
-    }
-
-    public void setWidth(float width) {
-        sprite.setSize(width, getHeight());
-    }
-
-    public float getHeight() {
-        return sprite.getHeight();
-    }
-
-    public void setHeight(float height) {
-        sprite.setSize(getWidth(), height);
-    }
-
-    public void setSize(float width, float height) {
-        sprite.setSize(width, height);
-    }
-
-    public void setSize(float size) {
-        setSize(size, size);
     }
 
     public Vector2 getScale() {
@@ -173,10 +149,6 @@ public class Sprited implements Buttonable, Parallaxable {
 
     public void setRotation(float degrees) {
         sprite.setRotation(degrees);
-    }
-
-    public void rotate(float degrees) {
-        sprite.rotate(degrees);
     }
 
     public boolean isFlipX() {

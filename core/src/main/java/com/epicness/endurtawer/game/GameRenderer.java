@@ -88,14 +88,14 @@ public class GameRenderer extends Renderer<GameStuff> {
     }
 
     private void renderDebug() {
-        shapeRenderer.begin();
-        stuff.getPlayer().drawDebug(shapeRenderer);
+        shapeBatch.begin();
+        stuff.getPlayer().drawDebug(shapeBatch);
         for (int i = 0; i < stuff.getGoodTentacles().size; i++) {
-            stuff.getGoodTentacles().get(i).drawDebug(shapeRenderer);
+            stuff.getGoodTentacles().get(i).drawDebug(shapeBatch);
         }
         for (int i = 0; i < stuff.getEvilTentacles().size; i++) {
-            stuff.getEvilTentacles().get(i).drawDebug(shapeRenderer);
+            stuff.getEvilTentacles().get(i).drawDebug(shapeBatch);
         }
-        shapeRenderer.end();
+        shapeBatch.end();
     }
 }

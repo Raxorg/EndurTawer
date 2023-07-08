@@ -38,6 +38,10 @@ public abstract class Logic {
         logicHandlers.add(logicHandler);
     }
 
+    public void registerHandler(int index, LogicHandler logicHandler) {
+        logicHandlers.add(index, logicHandler);
+    }
+
     public void setStructure(
             Game game,
             SharedAssets sharedAssets,

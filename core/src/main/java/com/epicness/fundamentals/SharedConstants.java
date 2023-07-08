@@ -12,7 +12,7 @@ public class SharedConstants {
     public static final float CAMERA_HALF_WIDTH = CAMERA_WIDTH / 2f;
     public static final float CAMERA_HALF_HEIGHT = CAMERA_HEIGHT / 2f;
     // Colors
-    public static final Color WHITE_CLEAR = new Color(1f, 1f, 1f, 0f);
+    public static final Color WHITE_CLEAR = new Color(1, 1, 1, 0);
     public static final Color WHITE_CLEAR_25 = new Color(1, 1, 1, 0.25f);
     public static final Color WHITE_CLEAR_50 = new Color(1, 1, 1, 0.50f);
     public static final Color WHITE_CLEAR_75 = new Color(1, 1, 1, 0.75f);

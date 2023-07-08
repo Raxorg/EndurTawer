@@ -12,8 +12,8 @@ public abstract class Stuff<A extends Assets> {
     public abstract void initializeStuff();
 
     // Structure
-    public void setSharedAssets(SharedAssets sharedAssetsOld) {
-        this.sharedAssets = sharedAssetsOld;
+    public void setSharedAssets(SharedAssets sharedAssets) {
+        this.sharedAssets = sharedAssets;
     }
 
     public void setAssets(A assets) {

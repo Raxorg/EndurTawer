@@ -4,12 +4,11 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.epicness.fundamentals.assets.AssetPaths;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameAssetPaths extends AssetPaths {
+public class GameAssetPaths {
 
     static final List<AssetDescriptor<?>> ASSETS;
     // Fonts
